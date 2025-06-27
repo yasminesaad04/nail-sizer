@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nail Size Finder</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: url('https://cdn.jsdelivr.net/gh/karthikj1/animated-backgrounds@main/butterflies-pastel.gif');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      color: #4a4a4a;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background-attachment: scroll;
+      }
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #d63384;
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 1.1em;
+    }
+
+    .upload-area {
+      border: 2px dashed #ff99cc;
+      padding: 25px;
+      text-align: center;
+      margin: 15px 0;
+      cursor: pointer;
+      background-color: #fff0f5;
+      transition: background 0.3s, transform 0.2s;
+      border-radius: 12px;
+    }
+
+    .upload-area:hover {
+      background-color: #ffe6f0;
+      transform: scale(1.02);
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      background: linear-gradient(to right, #ff66b2, #ff99cc);
+      color: white;
+      font-size: 1.1em;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #ff4da6, #ff80bf);
+    }
+
+    #results {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    .nail {
+      display: inline-block;
+      margin: 8px;
+      padding: 10px 14px;
+      background: #ffe6eb;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      font-size: 1em;
+    }
+
+    h2,
+    h3 {
+      color: #cc3399;
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 1.7em;
+      }
+
+      .nail {
+        font-size: 0.95em;
+        padding: 8px;
+      }
+
+      .upload-area {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✨ AI Nail Sizer ✨</h1>
+    <p>Upload photos of your hands with a coin for scale</p>
+
+    <div class="upload-area" onclick="document.getElementById('left-input').click()">
+      <p>📸 LEFT HAND PHOTO</p>
+      <input type="file" id="left-input" accept="image/*" style="display:none" />
+    </div>
+
+    <div class="upload-area" onclick="document.getElementById('right-input').click()">
+      <p>📸 RIGHT HAND PHOTO</p>
+      <input type="file" id="right-input" accept="image/*" style="display:none" />
+    </div>
+
+    <button class="btn" onclick="showResults()">💅 Get My Sizes</button>
+
+    <div id="results" style="display:none;">
+      <h2>Your Nail Sizes (mm)</h2>
+      <div id="left-results"></div>
+      <div id="right-results"></div>
+    </div>
+  </div>
+
+  <script>
+    function showResults() {
+      const sizes = {
+        left: [8, 9, 10, 9, 11],
+        right: [8, 9, 10, 9, 11]
+      };
+
+      document.getElementById("left-results").innerHTML =
+        "<h3>Left Hand</h3>" +
+        sizes.left
+          .map(
+            (s, i) =>
+              `<div class="nail">${["Pinky", "Ring", "Middle", "Index", "Thumb"][i]}: ${s}mm</div>`
+          )
+          .join("");
+
+      document.getElementById("right-results").innerHTML =
+        "<h3>Right Hand</h3>" +
+        sizes.right
+          .map(
+            (s, i) =>
+              `<div class="nail">${["Pinky", "Ring", "Middle", "Index", "Thumb"][i]}: ${s}mm</div>`
+          )
+          .join("");
+
+      document.getElementById("results").style.display = "block";
+    }
+  </script>
+</body>
+</html>
